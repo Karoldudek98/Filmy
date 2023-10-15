@@ -24,7 +24,7 @@ namespace Filmy.Controllers
         // GET: FilmController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(filmies.FirstOrDefault(x=>x.Id==id));
         }
 
         // GET: FilmController/Create
@@ -46,43 +46,37 @@ namespace Filmy.Controllers
         // GET: FilmController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(filmies.FirstOrDefault(x => x.Id == id));
         }
 
         // POST: FilmController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Film film)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            Film film1 = filmies.FirstOrDefault(x => x.Id == id);
+            film1.Tytul = film.Tytul;
+            film1.Opis = film.Opis;
+            film1.Ocena = film.Ocena;
+
+            return RedirectToAction("Index");
         }
 
         // GET: FilmController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(filmies.FirstOrDefault(x => x.Id == id));
         }
 
         // POST: FilmController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Film film)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            Film film1 = filmies.FirstOrDefault(x => x.Id == id);
+            filmies.Remove(film1);
+            return RedirectToAction("index");
+
         }
     }
 }
