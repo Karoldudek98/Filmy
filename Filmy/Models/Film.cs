@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace Filmy.Models
 {
@@ -14,4 +15,13 @@ namespace Filmy.Models
         [Column(TypeName = "int")]
         public int Ocena { get; set; }
     }
+
+    public class FilmsDbContex : DbContext
+    {
+        public FilmsDbContex(DbContextOptions<FilmsDbContex> options) : base(options)
+        {
+        }
+        public DbSet<Film> Films { get; set; }
+    }
+
 }

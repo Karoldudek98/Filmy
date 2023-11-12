@@ -1,3 +1,6 @@
+using Filmy.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,3 +28,5 @@ app.MapControllerRoute(
     pattern: "{controller=Film}/{action=Index}/{id?}");
 
 app.Run();
+
+builder.Services.AddDbContext<FilmsDbContex>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
